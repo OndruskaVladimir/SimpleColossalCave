@@ -8,14 +8,12 @@ public class Locations implements Map<Integer, Location> {
 
     static {
         // read locations from file and add them to our map
-        try (Scanner scanner = new Scanner(new FileReader("locations.txt"))) {
-            scanner.useDelimiter(",");
-            while (scanner.hasNextLine()) {
-                int loc = scanner.nextInt();
-                //move past comma in text file, to read rest of the line
-                scanner.skip(scanner.delimiter());
-                String description = scanner.nextLine();
-                //System.out.println("Imported loc: " + loc + ": " + description);
+        try (BufferedReader bR = new BufferedReader(new FileReader("locations.txt"))){
+            String input;
+            while ((input = bR.readLine()) != null) {
+                String[] splitInput = input.split(",");
+                int loc = Integer.parseInt(splitInput[0]);
+                String description = splitInput[1];
                 Map<String, Integer> tempExit = new HashMap<>();
                 locations.put(loc, new Location(loc, description, tempExit));
             }
@@ -31,7 +29,6 @@ public class Locations implements Map<Integer, Location> {
                 int loc = Integer.parseInt(splited[0]);
                 String direction = splited[1];
                 int destination = Integer.parseInt(splited[2]);
-                //System.out.println(loc + ": " + direction + ": " + destination);
                 Location location = locations.get(loc);
                 location.addExit(direction, destination);
             }

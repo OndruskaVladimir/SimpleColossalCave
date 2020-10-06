@@ -39,8 +39,6 @@ public class Main {
                 }
             }
         }
-
-
     }
 
     public static String determineDirection(String direction) {
@@ -51,8 +49,10 @@ public class Main {
         stringMap.put("EAST", "E");
         stringMap.put("WEST", "W");
         stringMap.put("QUIT", "Q");
+        stringMap.put("UP", "U");
+        stringMap.put("DOWN", "D");
         for (String s : directionSplit) {
-            if(stringMap.containsKey(s)) {
+            if (stringMap.containsKey(s)) {
                 return stringMap.get(s);
             }
         }
